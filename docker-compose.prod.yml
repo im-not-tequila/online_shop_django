@@ -8,6 +8,7 @@ services:
     command: gunicorn online_shop_django.wsgi:application -c gunicorn.conf.py
     volumes:
       - static_volume:/usr/src/online_shop_django/static
+      - media_volume:/usr/src/online_shop_django/media
     expose:
       - 8000
     env_file:
@@ -16,9 +17,11 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/usr/src/online_shop_django/static
+      - media_volume:/usr/src/online_shop_django/media
     ports:
       - '1337:90'
     depends_on:
       - web
 volumes:
   static_volume:
+  media_volume:
