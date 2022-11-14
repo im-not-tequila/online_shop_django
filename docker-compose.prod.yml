@@ -12,7 +12,13 @@ services:
     expose:
       - 8000
     env_file:
-      - ./.env.dev
+      - ./.env.prod
+    depends_on:
+    - migration
+  migration:
+    command: python manage.py migrate --noinput
+    volumes:
+      - .:/usr/src/online_shop_django
   nginx:
     build: ./nginx
     volumes:
