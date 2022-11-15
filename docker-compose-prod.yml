@@ -1,26 +1,33 @@
 version: '3.8'
 
 services:
-  web:
+  backend-master:
     build:
       context: .
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile-prod
+    image: porter/backend
+    container_name: online_shop_django
+    env_file:
+      - ./.env.prod
+
+  web:
+    image: porter/backend
+    depends_on:
+      - backend-master
+      - migration
     command: gunicorn online_shop_django.wsgi:application -c gunicorn.conf.py
     volumes:
       - static_volume:/usr/src/online_shop_django/static
       - media_volume:/usr/src/online_shop_django/media
     expose:
       - 8000
-    env_file:
-      - ./.env.prod
-    depends_on:
-    - migration
+
   migration:
-    build: 
-      .context: .
+    image: porter/backend
     command: python manage.py migrate --noinput
     volumes:
       - .:/usr/src/online_shop_django
+  
   nginx:
     build: ./nginx
     volumes:
