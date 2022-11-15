@@ -2,9 +2,12 @@
 
 В данном репозитории находится backend-часть проекта онлайн-магазина. Написано на python (django).
 
-В файле .env.prod необходимо отредактировать переменные: DJANGO_ALLOWED_HOSTS = ip-адрес сервера, на котором размещен backend; CORS_ALLOWED_ORIGINS = http://ip-адресс:порт сервера, на котором размещен frontend; CURRENT_HOST = http://ip-адресс:порт сервера, на котором будет работать backend.
+В файле .env.prod необходимо отредактировать переменные: 
+**DJANGO_ALLOWED_HOSTS** = ip-адрес сервера, на котором размещен backend; 
+**CORS_ALLOWED_ORIGINS** = http://ip-адресс:порт сервера, на котором размещен frontend; 
+**CURRENT_HOST** = http://ip-адресс:порт сервера, на котором будет работать backend.
 
-## Локальный запуск контейнера (http://localhost:8000)
+### Локальный запуск контейнера (http://localhost:8000)
 ```
 sudo docker-compose -f docker-compose-dev.yml up -d --build
 ```
