@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+    image: online_shop_django
     command: gunicorn online_shop_django.wsgi:application -c gunicorn.conf.py
     volumes:
       - static_volume:/usr/src/online_shop_django/static
@@ -16,6 +17,7 @@ services:
     depends_on:
     - migration
   migration:
+    image: online_shop_django
     command: python manage.py migrate --noinput
     volumes:
       - .:/usr/src/online_shop_django
