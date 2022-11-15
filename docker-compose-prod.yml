@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-prod
-    command: gunicorn online_shop_django.wsgi:application -c gunicorn.conf.py --bind 0.0.0.0:8000
+    command: gunicorn online_shop_django.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/usr/src/online_shop_django/static
       - media_volume:/usr/src/online_shop_django/media
